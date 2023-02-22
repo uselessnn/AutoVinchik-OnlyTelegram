@@ -1,0 +1,3 @@
+Telethon
+emoji
+colorama
