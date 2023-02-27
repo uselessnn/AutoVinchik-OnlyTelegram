@@ -3,7 +3,7 @@ from typing import Container
 import time
 import emoji
 from skipper import checkSkip, load_config, config, update_config
-from telethon import * 
+from telethon import TelegramClient, events, sync
 import os
 import colorama
 from colorama import Fore
@@ -51,19 +51,19 @@ mode = 0
 
 
 def telegram():
-    time.sleep(0.5)
-
+    time.sleep(0.5) # Не спрашивайте
+    
     print(f"{Fore.CYAN}TG |{Fore.RESET} ", end="")
-    message = client.get_messages(BOT, limit=1)[0].message.lower()
-
+    message = client.get_messages(BOT,limit=1)[0].message.lower()
+    
     if len(message.replace(" ", "")) < 2:
         message = client.get_messages(BOT)[0].message
         for i in client.iter_messages(BOT):
             if (len(i.message) > 0):
                 message = i.message
-
+                #print(message)
                 break
-
+        #input("ZXFC")
     skip = checkSkip(message)
     try:
         if str(type(skip)) == str(type(1)):
@@ -172,8 +172,8 @@ while True:
                             config[type].append(i.lower())
                     update_config(config)
             elif do == "4":
-                data = input(f"{Fore.CYAN}Новая задержка для Телеграм: ")
-                config["DELAY_TG"] = float(data)
+                dat1a = input(f"{Fore.CYAN}Новая задержка для Телеграм: ")
+                config["DELAY_TG"] = float(dat1a)
             elif do == "5":
                 config["SKIP_ALL"] = not config["SKIP_ALL"]
             elif do == "6":
